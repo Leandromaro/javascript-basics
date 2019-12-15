@@ -152,3 +152,19 @@ function foo() {
 var object = foo();
 console.log(object.getFullName());
 ```
+
+## Single threaded JS & Event Loop
+Once an interviewer asked me that “Is Javascript Multi threaded or Single threaded”, I said Single. He then asked, “Then how the ASYNC calls are handled and the UI thread is responsive during the call”, I couldn’t answer then.
+The fact is that Javascript is actually single threaded, each tab or window runs a single JS thread. JS engine manages a queue of events to which events are enqued and dequed, when an async call is sent through ajax and its response is received, an event is pushed into that event queue. These events are also pushed for button clicks handlers, time outs or key press handler etc. JS thread keeps on checking that queue when thread is idle and there is nothing to execute, if there is something in the queue, it pops it out and execute. To make it simple to understand just say that there is a queue of unprocessed events and a loop that iterates over this queue and execute the event handlers of those events one by one. The single threaded behavior can be understood by the example that there are two events in the event queue for ajax response received and one for a mouse over, but we are executing an infinite loop in the current JS thread, those callbacks will not get a chance to run no matter their time has come and will always be executed when the thread is idle.
+
+## Callbacks:
+Callbacks is a very important concept in javascript as it can be very handy in many scenarios. A callback is simply a function that is passed to another function as a parameter and is invoked or executed inside the other function.
+
+## Promises
+According to developer.mozilla :
+A Promise is an object representing the eventual completion or failure of an asynchronous operation. Essentially, a promise is a returned object to which you attach callbacks, instead of passing callbacks into a function.
+The benefits of using promises are also described here at developer.mozilla:
+* We can do chaining with promises i.e. executing two or more asynchronous operations back to back
+* Callbacks will never be called before the completion of the current run of the JavaScript event loop
+* Callbacks added with .then even after the success or failure of the asynchronous operation, will be called
+* Multiple callbacks may be added by calling .then several times, to be executed independently in insertion order
