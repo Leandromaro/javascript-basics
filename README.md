@@ -135,17 +135,18 @@ Closure in layman’s terms is simply a function inside a function, also called 
 function foo() {
   
 	var firstName = "John";			//property
-  var lastName = "Doe";				// property
-  var getFullName = function() {	//method
-    return firstName + " " + lastName;
-  }
+  	var lastName = "Doe";				// property
+	var getFullName = function() {	//method
+		return firstName + " " + lastName;
+	}
 	
 	
 	//this return works like an access modifier
 	//only getFullName() method is accessable of foo object
-  return {		
-    getFullName: getFullName
-  }
+	
+	return {		
+	  getFullName: getFullName
+	}
 }
 
 var object = foo();
