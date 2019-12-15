@@ -127,3 +127,27 @@ Notice that the  `const`  will not work in an imperative  [for](http://www.javas
 	}
 
 The reason is that the declaration is only evaluated once before the loop body starts.
+
+## Closures:
+Closure in layman’s terms is simply a function inside a function, also called nested function. It looks pretty straightforward when we see it like this but the real magic is related to its scopes. A closure has three scopes, nested function has access to variables defined in its own scope, in the scope of its parent function and the global variables. This behavior of closures can be very handy when It comes to programming in Javascript.
+
+```
+function foo() {
+  
+	var firstName = "John";			//property
+  var lastName = "Doe";				// property
+  var getFullName = function() {	//method
+    return firstName + " " + lastName;
+  }
+	
+	
+	//this return works like an access modifier
+	//only getFullName() method is accessable of foo object
+  return {		
+    getFullName: getFullName
+  }
+}
+
+var object = foo();
+console.log(object.getFullName());
+```
